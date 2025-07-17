@@ -35,6 +35,6 @@ jobs:
             echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
         - name: connect and pull
-          run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /app && docker stop sample-cicd && docker run --name sample-cicd -d -p 3000:3000 devbhutani10/sample-cicd:${{ github.sha }}"
+          run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "docker stop sample-cicd && docker run --name sample-cicd -d -p 3000:3000 devbhutani10/sample-cicd:${{ github.sha }}"
         - name: cleanup
           run: rm -rf ~/.ssh
